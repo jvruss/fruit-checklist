@@ -1,3 +1,114 @@
+@import 'media';
+
 .HomePage {
-  
+  width: 100%;
+
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.Fruit {
+  width: calc(97% / 3);
+  margin: 0 0.5% 2% 0.5%;
+  height: auto;
+
+  display: flex;
+  justify-content: space-between;
+
+  border-radius: var(--border-radius-default);
+  background-color: var(--color-default-light);
+
+  transition: box-shadow 170ms ease;
+
+  &:hover {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+  }
+
+  @media (max-width: $verticalTablet) {
+    width: 49%;
+  }
+
+  @media (max-width: $verticalPhone) {
+    width: 100%;
+    margin: 0 0 2% 0;
+  }
+
+  &__left,
+  &__right {
+    padding: var(--padding);
+  }
+
+  &__left {
+    width: 30%;
+    object-fit: contain;
+  }
+
+  &__right {
+    width: 70%;
+
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__title {
+    margin-bottom: 20px;
+  }
+
+  &__bottom {
+    width: 100%;
+    margin-top: auto;
+
+    display: flex;
+    align-items: center;
+
+    font-weight: 500;
+  }
+
+  &__likes {
+    margin-right: 10px;
+
+    display: flex;
+    align-items: center;
+
+    &-icon {
+      width: 20px;
+      height: 20px;
+      margin-right: 5px;
+
+      fill: var(--color-brand-red);
+    }
+
+    &-amount {
+      color: var(--color-brand-red);
+    }
+  }
+
+  &__rating {
+    margin-right: 10px;
+
+    display: flex;
+    align-items: center;
+
+    &-icon {
+      width: 20px;
+      height: 20px;
+      margin-right: 5px;
+
+      fill: var(--color-brand-green);
+    }
+
+    &-amount {
+      color: var(--color-brand-green);
+    }
+  }
+
+  &__checks {
+    margin-left: auto;
+
+    &-icon {
+      width: 15px;
+      height: 15px;
+      fill: var(--color-brand-yellow);
+    }
+  }
 }

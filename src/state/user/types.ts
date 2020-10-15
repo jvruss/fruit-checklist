@@ -9,18 +9,6 @@ export interface SetIsAuthenticated {
 
 export type UserActionTypes = SetIsAuthenticated;
 
-//
-
-export type LoginArgs = {
-  email: string;
-  password: string;
-};
-
-export type LoginData = {
-  token: string;
-  userId: string;
-};
-
 export interface UserState {
   isAuthenticated: boolean;
 }

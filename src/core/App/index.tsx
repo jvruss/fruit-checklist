@@ -1,21 +1,45 @@
-import React, { FC } from 'react';
+import React, { FC, Suspense, lazy } from 'react';
+import { Route, Switch, Redirect } from 'react-router-dom';
+import classNames from 'classnames/bind';
 
-// State
-import { LoginData } from '../../state/user/types';
+// Components
+import Header from '../../components/Layout/Header';
+import Menu from '../../components/Layout/Menu';
 
-// Core
-import useRoutes from '../useRoutes';
+// Styles
+import styles from './App.module.scss';
 
-// Style
-import './App.scss';
+const cx = classNames.bind(styles);
 
-const userData = localStorage.getItem('userData');
-const parsedUserData = userData ? (JSON.parse(userData) as LoginData) : null;
+// Pages
+const HomePage = lazy(() => import('../../pages/HomePage'));
+const FruitPage = lazy(() => import('../../pages/FruitPage'));
 
 const App: FC = () => {
-  const routes = useRoutes(Boolean(parsedUserData?.token));
-
-  return <div className="App">{routes}</div>;
+  return (
+    <div className={cx('App')}>
+      <Header className={cx('App__header')} />
+      <main className={cx('App__main')}>
+        <Menu className={cx('App__menu')} />
+        <div className={cx('App__workarea')}>
+          <Suspense fallback={<div>Загрузка...</div>}>
+            <Switch>
+              <Route exact path="/">
+                <HomePage />
+              </Route>
+              <Route path="/fruit/:name">
+                <FruitPage />
+              </Route>
+              <Route path="/my">
+                <div>My fruits</div>
+              </Route>
+              <Redirect to="/" />
+            </Switch>
+          </Suspense>
+        </div>
+      </main>
+    </div>
+  );
 };
 
 export default App;
